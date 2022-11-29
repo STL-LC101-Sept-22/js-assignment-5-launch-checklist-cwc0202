@@ -38,8 +38,8 @@ function validateInput(testInput) {
 //         <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
 //     </ol>
 // </div>
-let faultyItems = document.getElementById('faultyItems')
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    let faultyItems = document.getElementById('faultyItems')
     faultyItems.innerHTML = `
                 <ol>
                     <li id="pilotStatus" data-testid="pilotStatus">Pilot ${pilot} Ready</li>
@@ -48,9 +48,21 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
                     <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
                 </ol>
 `
+    let launchStatus = document.getElementById("launchStatus");
+    let fuelStatus = document.getElementById("fuelStatus");
+    let cargoStatus = document.getElementById("cargoStatus");
+    launchStatus.innerHTML = "Shuttle is ready for launch";
     if (fuelLevel < 10000) {
-        let fuelStatus = document.getElementById("fuelStatus")
-        fuelStatus.style.visibility = "visible"
+        faultyItems.style.visibility = "visible";
+        fuelStatus.innerHTML = "Fuel level too low for launch";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
+    }
+    if (cargoLevel > 10000) {
+        faultyItems.style.visibility = "visible";
+        cargoStatus.innerHTML = "Cargo mass too high for launch";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
     }
 }
 
