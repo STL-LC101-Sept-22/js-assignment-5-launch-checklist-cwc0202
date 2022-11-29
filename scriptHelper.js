@@ -23,14 +23,35 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 // formSubmission() function at the appropriate time in your script.js file!
 
 function validateInput(testInput) {
-    if (isNaN(testInput)) "Not a Number";
-    if (testInput == "") "Empty";
+    if (isNaN(testInput)) return "Not a Number";
+    if (testInput == "") return "Empty";
     return "Is a Number"
 
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
+// <div  id="faultyItems" data-testid="faultyItems">
+//     <ol>
+//         <li id="pilotStatus" data-testid="pilotStatus">Pilot Ready</li>
+//         <li id="copilotStatus" data-testid="copilotStatus">Co-pilot Ready</li>
+//         <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
+//         <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
+//     </ol>
+// </div>
+let faultyItems = document.getElementById('faultyItems')
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    faultyItems.innerHTML = `
+                <ol>
+                    <li id="pilotStatus" data-testid="pilotStatus">Pilot ${pilot} Ready</li>
+                    <li id="copilotStatus" data-testid="copilotStatus">Co-pilot ${copilot} Ready</li>
+                    <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
+                    <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
+                </ol>
+`
+    if (fuelLevel < 10000) {
+        let fuelStatus = document.getElementById("fuelStatus")
+        fuelStatus.style.visibility = "visible"
+    }
 }
 
 async function myFetch() {
