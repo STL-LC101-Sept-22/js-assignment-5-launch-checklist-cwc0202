@@ -1,3 +1,4 @@
+const { formSubmission } = require("./scriptHelper");
 
 window.addEventListener("load", function () {
 
@@ -11,6 +12,21 @@ window.addEventListener("load", function () {
     }).then(function () {
         console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+        let chosenPlanet = pickPlanet(listedPlanets)
+        addDestinationInfo(document, chosenPlanet.name, chosenPlanet.diameter, chosenPlanet.star, chosenPlanet.distance, chosenPlanet.moons, chosenPlanet.image)
     })
+    let form = this.document.querySelector("form")
+    form.addEventListener("submit", function (event) {
+        event.preventDefault()
+        let pilot = document.querySelector("input[name=pilotName]")
+        let pilotValue = pilot.value
+        let copilot = document.querySelector("input[name=copilotName]")
+        let copilotValue = copilot.value
+        let fuel = document.querySelector("input[name=fuelLevel]")
+        let fuelValue = fuel.value
+        let cargo = document.querySelector("input[name=cargoLevel]")
+        let cargoValue = cargo.value
 
+        formSubmission(document, pilotValue, copilotValue, fuelValue, cargoValue)
+    })
 });

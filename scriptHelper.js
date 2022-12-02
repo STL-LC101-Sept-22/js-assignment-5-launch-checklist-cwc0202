@@ -1,29 +1,38 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
+    let div = document.getElementById("missionTarget")
+    div.innerHTML =
+        // Here is the HTML formatting for our mission target div.
+        `
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name: ${name}</li>
+                     <li>Diameter: ${diameter}</li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance}</li>
+                     <li>Number of Moons: ${moons}</li>
                  </ol>
-                 <img src="">
-    */
+                 <img src="${imageUrl}">
+    `
 }
 
 function validateInput(testInput) {
-    if (isNaN(testInput)) return "Not a Number";
+    let numberInput = Number(testInput)
     if (testInput == "") return "Empty";
+    if (isNaN(numberInput)) return "Not a Number";
     return "Is a Number"
 
 }
 
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    if (validateInput(pilot) == "Empty" || validateInput(copilot) == "Empty" || validateInput(fuelLevel) == "Empty" || validateInput(cargoLevel) == "Empty") {
+        alert("All fields are required!")
+    }
+    if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
+        alert("Please only enter valid data into fields")
+    }
     let faultyItems = document.getElementById('faultyItems')
     faultyItems.innerHTML = `
                 <ol>
@@ -62,7 +71,7 @@ async function myFetch() {
 }
 
 function pickPlanet(planets) {
-    return planets[(Math.floor((Math.random() * 6)))]
+    return planets[(Math.floor((Math.random() * planets.length)))]
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
