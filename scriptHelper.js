@@ -20,7 +20,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 function validateInput(testInput) {
     // (typeof testInput == "string") ? numberInput = Number(testInput) : numberInput = testInput     leaving this here just in case
     let numberInput = Number(testInput)
-    if (testInput == "") return "Empty";
+    if (testInput === "") return "Empty";
     if (isNaN(numberInput)) return "Not a Number";
     return "Is a Number"
 }
@@ -33,9 +33,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let copilotStatus = document.getElementById("copilotStatus");
     let launchStatus = document.getElementById("launchStatus");
 
-    if (validateInput(pilot) == "Empty" || validateInput(copilot) == "Empty" || validateInput(fuelLevel) == "Empty" || validateInput(cargoLevel) == "Empty") {
+    if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
         alert("All fields are required!");
-    } else if (validateInput(pilot) == "Is a Number" || validateInput(copilot) == "Is a Number" || validateInput(fuelLevel) == "Not a Number" || validateInput(cargoLevel) == "Not a Number") {
+    } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
         alert("Be sure to only enter valid information in the inputs!");
     } else {
         list.style.visibility = "visible";
@@ -67,12 +67,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-    let planetsReturned = "";
 
-    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
-        return response.json()
+
+    let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
+        return response.json();
+
     });
-
     return planetsReturned;
 }
 

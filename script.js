@@ -28,6 +28,6 @@ window.addEventListener("load", function () {
         let cargo = document.querySelector("input[name=cargoMass]")
         let cargoValue = cargo.value
 
-        formSubmission(document, list, pilotValue, copilotValue, fuelValue, cargoValue)
+        formSubmission(document, list, pilotValue, copilotValue, fuelValue, cargoValue);
     })
 });
