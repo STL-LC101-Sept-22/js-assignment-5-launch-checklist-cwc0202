@@ -1,4 +1,3 @@
-const { formSubmission } = require("./scriptHelper");
 
 window.addEventListener("load", function () {
 
@@ -15,7 +14,9 @@ window.addEventListener("load", function () {
         let chosenPlanet = pickPlanet(listedPlanets)
         addDestinationInfo(document, chosenPlanet.name, chosenPlanet.diameter, chosenPlanet.star, chosenPlanet.distance, chosenPlanet.moons, chosenPlanet.image)
     })
-    let form = this.document.querySelector("form")
+    let form = document.querySelector("form")
+    let list = document.getElementById("faultyItems")
+    list.style.visibility = "hidden"
     form.addEventListener("submit", function (event) {
         event.preventDefault()
         let pilot = document.querySelector("input[name=pilotName]")
@@ -24,9 +25,9 @@ window.addEventListener("load", function () {
         let copilotValue = copilot.value
         let fuel = document.querySelector("input[name=fuelLevel]")
         let fuelValue = fuel.value
-        let cargo = document.querySelector("input[name=cargoLevel]")
+        let cargo = document.querySelector("input[name=cargoMass]")
         let cargoValue = cargo.value
 
-        formSubmission(document, pilotValue, copilotValue, fuelValue, cargoValue)
+        formSubmission(document, list, pilotValue, copilotValue, fuelValue, cargoValue)
     })
 });
